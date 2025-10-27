@@ -85,7 +85,7 @@ export default function ContactPage() {
 
           <div className="max-w-3xl mx-auto mb-12">
             <p className="text-xl text-white mb-6">Ready to embark on your Bollywood dance journey? Whether you&apos;re a complete beginner or looking to perfect your moves, Luna is here to guide you every step of the way.</p>
-            <div className="flex flex-wrap justify-center gap-4 text-sm text-white">
+            {/* <div className="flex flex-wrap justify-center gap-4 text-sm text-white">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-[#ef5c28] rounded-full animate-pulse"></div>
                 <span>Professional Instruction</span>
@@ -98,7 +98,7 @@ export default function ContactPage() {
                 <div className="w-2 h-2 bg-[#ef5c28] rounded-full animate-pulse delay-400"></div>
                 <span>Personalized Approach</span>
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>
