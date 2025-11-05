@@ -1,13 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { MapPin, Mail, Clock, Send, CheckCircle, Heart, Sparkles, Music } from "lucide-react";
+import { MapPin, Mail, Send, CheckCircle, Heart, Sparkles, Music, Instagram, Youtube, Clock } from "lucide-react";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -84,7 +83,7 @@ export default function ContactPage() {
           </h1>
 
           <div className="max-w-3xl mx-auto mb-12">
-            <p className="text-xl text-white mb-6">Ready to embark on your Bollywood dance journey? Whether you&apos;re a complete beginner or looking to perfect your moves, Luna is here to guide you every step of the way.</p>
+            <p className="text-xl text-white mb-6">Ready to embark on your Bollywood dance journey? Whether you&apos;re a complete beginner, looking to perfect your moves, looking for a safe space to move or looking for something special. We are here to meet all your needs.</p>
             {/* <div className="flex flex-wrap justify-center gap-4 text-sm text-white">
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 bg-[#ef5c28] rounded-full animate-pulse"></div>
@@ -104,7 +103,7 @@ export default function ContactPage() {
       </section>
 
       {/* Contact Content */}
-      <section className="py-20 bg-white">
+      <section id="contact-form" className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             {/* Contact Information - Simplified */}
@@ -122,8 +121,8 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-2">Studio Location</h3>
-                    <p className="text-gray-600">Studio 22, Jamaica Street</p>
-                    <p className="text-gray-600">Glasgow, Scotland</p>
+                    <p className="text-gray-600">Studio Location Studio 22, Jamaica Street,</p>
+                    <p className="text-gray-600"> Glasgow , G1 4QD</p>
                   </div>
                 </div>
 
@@ -140,17 +139,26 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                {/* Studio Hours */}
+                {/* Social Media */}
                 <div className="flex items-start space-x-4 p-6 bg-gray-50 rounded-2xl hover:bg-gray-100 transition-colors duration-300">
                   <div className="w-12 h-12 bg-gradient-to-br from-[#eb1c23] to-[#7b1c11] rounded-xl flex items-center justify-center flex-shrink-0">
-                    <Clock className="h-6 w-6 text-white" />
+                    <Heart className="h-6 w-6 text-white" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-gray-900 mb-2">Studio Hours</h3>
-                    <div className="text-gray-600 space-y-1">
-                      <p>Monday - Friday: 6:00 PM - 10:00 PM</p>
-                      <p>Saturday: 10:00 AM - 4:00 PM</p>
-                      <p>Sunday: 2:00 PM - 6:00 PM</p>
+                    <h3 className="font-semibold text-gray-900 mb-3">Follow Our Socials</h3>
+                    <div className="space-y-2">
+                      <a href="https://www.instagram.com/masalamoves3?igsh=NTBuNWZxeGRkZmE5&utm_source=qr" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 text-gray-600 hover:text-[#eb1c23] transition-colors">
+                        <Instagram className="h-4 w-4" />
+                        <span>Instagram</span>
+                      </a>
+                      <a href="https://www.tiktok.com/@masalamoves3_?_t=ZN-90K34riPhZO&_r=1" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 text-gray-600 hover:text-[#eb1c23] transition-colors">
+                        <Music className="h-4 w-4" />
+                        <span>TikTok</span>
+                      </a>
+                      <a href="https://youtube.com/@masalamoves3?si=SYwMJpiZ3JwTrjiV" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 text-gray-600 hover:text-[#eb1c23] transition-colors">
+                        <Youtube className="h-4 w-4" />
+                        <span>YouTube</span>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -175,7 +183,7 @@ export default function ContactPage() {
               <Card className="border-0 shadow-xl">
                 <CardHeader className="text-center pb-6">
                   <CardTitle className="text-2xl text-gray-900">Send us a Message</CardTitle>
-                  <CardDescription className="text-base text-gray-600">Have questions about classes or want to book a session? We&apos;d love to hear from you!</CardDescription>
+                  <CardDescription className="text-base text-gray-600">Have any unanswered questions or looking for something tailored just for you? Contact us with the form below</CardDescription>
                 </CardHeader>
                 <CardContent>
                   {isSubmitted ? (
@@ -246,7 +254,7 @@ export default function ContactPage() {
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-gradient-to-br from-[#eb1c23]/5 to-transparent rounded-full blur-3xl"></div>
         </div>
 
-        <div className="container mx-auto px-4 relative z-10">
+        <div id="faq" className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16">
             <div className="inline-flex items-center gap-2 bg-gradient-to-r from-[#eb1c23]/10 to-[#7b1c11]/10 px-6 py-3 rounded-full mb-6 backdrop-blur-sm border border-[#eb1c23]/20">
               <Sparkles className="h-5 w-5 text-[#eb1c23]" />
@@ -327,7 +335,7 @@ export default function ContactPage() {
                   </div>
                 </div>
                 <p className="text-gray-600 leading-relaxed text-base">
-                  We understand life happens! Full refunds are available for cancellations made at least 24 hours before class. For shorter notice cancellations, we offer class credits that can be used for future sessions - because we want you to dance when it&apos;s right for you!
+                  Unfortunately, at this stage there is no cancellation option. However, we understand life happens and are happy to offer a credit for notice upto 48 hours (2 days prior to the class). Any cancellations with 2 days of the class won&apos;t be credited.
                 </p>
               </CardContent>
             </Card>
@@ -345,7 +353,7 @@ export default function ContactPage() {
                   </div>
                 </div>
                 <p className="text-gray-600 leading-relaxed text-base">
-                  Yes! Luna offers private and semi-private lessons perfect for personalized attention, wedding choreography, special events, or if you prefer one-on-one instruction. These sessions can be tailored to your specific goals and schedule.
+                  Yes! We offer private lessons perfect for personalized attention, specific workshops, wedding choreography, special events. These sessions can be tailored to your specific goals and schedule. Just get in touch with your requirements and we will get back asap.
                 </p>
               </CardContent>
             </Card>
@@ -363,7 +371,8 @@ export default function ContactPage() {
                   </div>
                 </div>
                 <p className="text-gray-600 leading-relaxed text-base">
-                  Located in the heart of Glasgow city center! The studio is easily accessible by public transport with several bus stops nearby. Street parking and public car parks are available within walking distance. Full directions will be sent with your booking confirmation.
+                  Studio 22 is located in Glasgow city center! It is easily accessible by public transport with bus stops nearby, walking distance 5 mins from Glasgow Central, 10 mins from Queen street. Street parking and public car parks are available within walking distance. Nearest car park is
+                  Q-park in Jamaica street. Full directions will be sent with your booking confirmation.
                 </p>
               </CardContent>
             </Card>
@@ -374,8 +383,15 @@ export default function ContactPage() {
             <div className="bg-gradient-to-r from-[#eb1c23] to-[#7b1c11] p-8 rounded-3xl shadow-2xl max-w-6xl mx-auto">
               <h3 className="text-2xl font-bold text-white mb-4">Still have questions?</h3>
               <p className="text-white/90 mb-6 text-lg">We&apos;re here to help you start your amazing dance journey!</p>
-              <Button size="lg" className="bg-white text-[#eb1c23] hover:bg-gray-100 font-semibold px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105" asChild>
-                <Link href="#contact-form">Ask Your Question</Link>
+              <Button
+                size="lg"
+                onClick={() => {
+                  const element = document.getElementById("contact-form");
+                  element?.scrollIntoView({ behavior: "smooth" });
+                }}
+                className="bg-white text-[#eb1c23] hover:bg-gray-100 font-semibold px-8 py-3 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              >
+                Get in Touch
               </Button>
             </div>
           </div>

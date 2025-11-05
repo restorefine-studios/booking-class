@@ -4,7 +4,7 @@ import { strapiAPI } from "@/lib/strapi";
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { email, password, firstName, lastName, phone, address, dateOfBirth, gender, hearAboutUs } = body;
+    const { email, password, firstName, lastName, phone, address, hearAboutUs } = body;
 
     // Register user with Strapi
     const result = await strapiAPI.register({
@@ -15,8 +15,6 @@ export async function POST(request: NextRequest) {
       lastName,
       phone,
       address,
-      dateOfBirth,
-      gender,
       hearAboutUs,
     });
 

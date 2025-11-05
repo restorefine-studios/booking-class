@@ -27,7 +27,7 @@ export default function Hero() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <Link href="/classes">
+            <Link href="/classes#upcoming-classes">
               <Button size="lg" className="bg-gradient-to-r from-[#eb1c23] to-[#7b1c11] hover:from-[#eb1c23]/90 hover:to-[#7b1c11]/90 text-white font-semibold py-7 px-10 rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
                 Book Your Class
               </Button>
@@ -41,11 +41,11 @@ export default function Hero() {
         </div>
 
         {/* Scroll Indicator */}
-        <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+        {/* <div className="absolute -bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
           <div className="w-6 h-10 border-2 border-white/50 rounded-full flex justify-center">
             <div className="w-1 h-3 bg-white/50 rounded-full mt-2"></div>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );

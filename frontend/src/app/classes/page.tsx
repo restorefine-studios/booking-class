@@ -119,7 +119,7 @@ export default function ClassesPage() {
   return (
     <div className="min-h-screen pt-16">
       {/* Hero Section */}
-      <section className="relative py-20 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url(/label.png)" }}>
+      <section className="relative py-20 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url(/label1.png)" }}>
         {/* <div className="absolute inset-0 bg-black/50"></div> */}
         <div className="relative container mx-auto px-4 text-center">
           <div className="inline-flex items-center space-x-2 mb-6">
@@ -130,7 +130,8 @@ export default function ClassesPage() {
           <h1 className="text-4xl md:text-5xl font-bold text-white leading-tight mb-6">
             <span className="text-white">Dance Classes</span>
           </h1>
-          <p className="text-lg text-white/90 leading-relaxed max-w-2xl mx-auto">Book classes up to 4 weeks in advance with easy online booking system.</p>
+          <p className="text-lg text-white/90 leading-relaxed max-w-2xl mx-auto">Find the perfect class for you, that fits your schedule!</p>
+          <p className="text-lg text-white/90 leading-relaxed max-w-2xl mx-auto">You can book our weekly classes upto 4 weeks in advance with our easy online booking system.</p>
         </div>
       </section>
       {/* Weekly Classes Section */}
@@ -154,32 +155,43 @@ export default function ClassesPage() {
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight mb-6">
                   <span className="text-gradient">Weekly Classes</span>
                 </h2>
-                <p className="text-lg text-gray-600 leading-relaxed mb-8">Join our regular weekly dance sessions and immerse yourself in the vibrant world of Bollywood fusion. Our structured weekly classes help you build technique, confidence, and connect with a community of dance enthusiasts.</p>
+                <p className="text-lg text-gray-600 leading-relaxed mb-8">
+                  Join our regular weekly dance sessions and immerse yourself in the vibrant world of Bollywood. Our weekly classes are designed for you to dance to a choreography each week with a variety of style. Crafted for you to enjoy your hour and complete a bit of a challenge, all while you
+                  connect with a community of dance enthusiast like yourself.
+                </p>
                 <div className="space-y-4 mb-8">
                   <div className="flex items-center space-x-3">
                     <div className="w-8 h-8 bg-gradient-to-br from-[#eb1c23]/20 to-[#7b1c11]/20 rounded-xl flex items-center justify-center">
-                      <Clock className="h-4 w-4 text-[#eb1c23]" />
+                      <Award className="h-4 w-4 text-[#eb1c23]" />
                     </div>
-                    <span className="text-gray-700">Consistent schedule every week</span>
+                    <span className="text-gray-700">Professional Studio environment</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <div className="w-8 h-8 bg-gradient-to-br from-[#eb1c23]/20 to-[#7b1c11]/20 rounded-xl flex items-center justify-center">
+                      <Heart className="h-4 w-4 text-[#eb1c23]" />
+                    </div>
+                    <span className="text-gray-700">Bollywood escape just for you</span>
                   </div>
                   <div className="flex items-center space-x-3">
                     <div className="w-8 h-8 bg-gradient-to-br from-[#eb1c23]/20 to-[#7b1c11]/20 rounded-xl flex items-center justify-center">
                       <Users className="h-4 w-4 text-[#eb1c23]" />
                     </div>
-                    <span className="text-gray-700">Build lasting friendships in our dance community</span>
-                  </div>
-                  <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 bg-gradient-to-br from-[#eb1c23]/20 to-[#7b1c11]/20 rounded-xl flex items-center justify-center">
-                      <MapPin className="h-4 w-4 text-[#eb1c23]" />
-                    </div>
-                    <span className="text-gray-700">Professional studio environment</span>
+                    <span className="text-gray-700">Build lasting friendships</span>
                   </div>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <Button className="bg-gradient-to-r from-[#eb1c23] to-[#7b1c11] hover:from-[#eb1c23]/90 hover:to-[#7b1c11]/90 text-white font-semibold py-3 px-8 rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">Join Weekly Classes</Button>
-                  <Button variant="outline" className="border-2 border-[#eb1c23] text-[#eb1c23] hover:bg-[#eb1c23] hover:text-white font-semibold py-3 px-8 rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
-                    View Schedule
+                  <Button
+                    onClick={() => {
+                      const element = document.getElementById("upcoming-classes");
+                      element?.scrollIntoView({ behavior: "smooth" });
+                    }}
+                    className="bg-gradient-to-r from-[#eb1c23] to-[#7b1c11] hover:from-[#eb1c23]/90 hover:to-[#7b1c11]/90 text-white font-semibold py-3 px-8 rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300"
+                  >
+                    Join Weekly Classes
                   </Button>
+                  {/* <Button variant="outline" className="border-2 border-[#eb1c23] text-[#eb1c23] hover:bg-[#eb1c23] hover:text-white font-semibold py-3 px-8 rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
+                    View Schedule
+                  </Button> */}
                 </div>
               </div>
             </div>
@@ -212,7 +224,9 @@ export default function ClassesPage() {
             <div className="space-y-8 order-2">
               <div className="inline-flex items-center space-x-2 mb-6">
                 <div className="w-12 h-12 bg-gradient-to-br from-[#eb1c23] to-[#7b1c11] rounded-2xl flex items-center justify-center shadow-lg">
-                  <Mail className="w-6 h-6 text-white" />
+                  <Link href="/contact">
+                    <Mail className="w-6 h-6 text-white" />
+                  </Link>
                 </div>
                 {/* <div className="flex space-x-1">
                   {[...Array(5)].map((_, i) => (
@@ -223,14 +237,15 @@ export default function ClassesPage() {
 
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight mb-6">
-                  Have Questions? <span className="text-gradient">Get In Touch</span>
+                  Just for you! <span className="text-gradient">Get In Touch</span>
                 </h2>
-                <p className="text-lg text-gray-600 leading-relaxed mb-8">Whether you&apos;re curious about our dance styles, want to know more about class levels, or need help choosing the perfect class for you, we&apos;re here to help. Don&apos;t hesitate to reach out with any questions!</p>
+                <p className="text-lg text-gray-600 leading-relaxed mb-8">Are you looking for private lessons, private workshops, gift vouchers, wedding or special event creative packages. Please get in touch with your requirements to bring your vision to life with our creativity</p>
                 <div className="space-y-4 mb-8">
                   <div className="flex items-center space-x-3">
-                    <div className="w-8 h-8 bg-gradient-to-br from-[#eb1c23]/20 to-[#7b1c11]/20 rounded-xl flex items-center justify-center">
+                    <div className="w-8 h-8 bg-gradient-to-br from-[#eb1c23]/20 to-[#7b1c11]/20 rounded-xl flex items-center justify-center cursor-pointer hover:bg-gradient-to-br hover:from-[#eb1c23]/30 hover:to-[#7b1c11]/30 transition-all duration-300">
                       <Mail className="h-4 w-4 text-[#eb1c23]" />
                     </div>
+
                     <span className="text-gray-700">Email us your questions anytime</span>
                   </div>
                   <div className="flex items-center space-x-3">
@@ -247,7 +262,7 @@ export default function ClassesPage() {
                   </div> */}
                 </div>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <Link href="/contact">
+                  <Link href="/contact" className="hidden sm:block">
                     <Button className="bg-gradient-to-r from-[#eb1c23] to-[#7b1c11] hover:from-[#eb1c23]/90 hover:to-[#7b1c11]/90 text-white font-semibold py-3 px-8 rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">Contact Us Today</Button>
                   </Link>
                   {/* <Button variant="outline" className="border-2 border-[#7b1c11] text-[#7b1c11] hover:bg-[#7b1c11] hover:text-white font-semibold py-3 px-8 rounded-2xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">
@@ -262,17 +277,17 @@ export default function ClassesPage() {
       {/* ----- not needed rn so commented out ----- */}
       {/* Classes Section */}
 
-      <section className="py-20 bg-white">
+      <section id="upcoming-classes" className="py-20 bg-white">
         <div className="container mx-auto px-4">
           {classes.length === 0 ? (
             <div className="text-center py-16">
               <div className="w-20 h-20 mx-auto bg-gradient-to-br from-[#eb1c23] to-[#7b1c11] rounded-2xl flex items-center justify-center shadow-xl mb-8">
                 <Calendar className="h-10 w-10 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">No Classes Available</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Upcoming Classes schedule</h3>
               <p className="text-lg text-gray-600 leading-relaxed mb-8 max-w-md mx-auto">There are currently no classes scheduled for the next 2 weeks. Check back soon or contact Luna to schedule a class.</p>
-              <Link href="/contact">
-                <Button className="bg-gradient-to-r from-[#eb1c23] to-[#7b1c11] hover:from-[#eb1c23]/90 hover:to-[#7b1c11]/90 text-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">Contact Luna</Button>
+              <Link href="/contact#faq">
+                <Button className="bg-gradient-to-r from-[#eb1c23] to-[#7b1c11] hover:from-[#eb1c23]/90 hover:to-[#7b1c11]/90 text-white shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300">Any Questions?</Button>
               </Link>
             </div>
           ) : (

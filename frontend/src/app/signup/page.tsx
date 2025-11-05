@@ -23,8 +23,6 @@ export default function SignupPage() {
     confirmPassword: "",
     phone: "",
     address: "",
-    dateOfBirth: "",
-    gender: "",
     hearAboutUs: "",
   });
   const [showPassword, setShowPassword] = useState(false);
@@ -69,8 +67,6 @@ export default function SignupPage() {
       lastName: formData.lastName,
       phone: formData.phone,
       address: formData.address,
-      dateOfBirth: formData.dateOfBirth,
-      gender: formData.gender,
       hearAboutUs: formData.hearAboutUs,
     };
 
@@ -139,27 +135,6 @@ export default function SignupPage() {
                   <Input id="address" name="address" type="text" value={formData.address} onChange={handleInputChange} required placeholder="123 Main Street, London, UK" disabled={registerMutation.isPending} />
                 </div>
 
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <Label htmlFor="dateOfBirth">Date of Birth</Label>
-                    <Input id="dateOfBirth" name="dateOfBirth" type="date" value={formData.dateOfBirth} onChange={handleInputChange} required disabled={registerMutation.isPending} />
-                  </div>
-                  <div className="space-y-2">
-                    <Label htmlFor="gender">Gender</Label>
-                    <Select value={formData.gender} onValueChange={(value) => handleSelectChange("gender", value)} disabled={registerMutation.isPending}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select your gender" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="male">Male</SelectItem>
-                        <SelectItem value="female">Female</SelectItem>
-                        <SelectItem value="non-binary">Non-binary</SelectItem>
-                        <SelectItem value="prefer-not-to-say">Prefer not to say</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
-
                 <div className="space-y-2">
                   <Label htmlFor="hearAboutUs">How did you hear about us?</Label>
                   <Select value={formData.hearAboutUs} onValueChange={(value) => handleSelectChange("hearAboutUs", value)} disabled={registerMutation.isPending}>
@@ -167,13 +142,11 @@ export default function SignupPage() {
                       <SelectValue placeholder="Please select" />
                     </SelectTrigger>
                     <SelectContent>
-                      <SelectItem value="social-media">Social Media</SelectItem>
-                      <SelectItem value="friend-referral">Friend/Family Referral</SelectItem>
+                      <SelectItem value="instagram">Instagram</SelectItem>
+                      <SelectItem value="tiktok">TikTok</SelectItem>
+                      <SelectItem value="family-friends">Family/Friends</SelectItem>
                       <SelectItem value="google-search">Google Search</SelectItem>
-                      <SelectItem value="flyer-poster">Flyer/Poster</SelectItem>
-                      <SelectItem value="local-newspaper">Local Newspaper</SelectItem>
-                      <SelectItem value="community-event">Community Event</SelectItem>
-                      <SelectItem value="other">Other</SelectItem>
+                      <SelectItem value="through-luna-shree">Through Luna Shree</SelectItem>
                     </SelectContent>
                   </Select>
                 </div>
