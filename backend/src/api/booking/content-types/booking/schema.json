@@ -18,6 +18,16 @@
       "visible": true
     }
   },
+  "config": {
+    "attributes": {
+      "classOccurrence": {
+        "mainField": "title"
+      },
+      "user": {
+        "mainField": "email"
+      }
+    }
+  },
   "attributes": {
     "user": {
       "type": "relation",
