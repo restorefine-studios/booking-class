@@ -30,21 +30,21 @@ export default function Footer() {
               </div>
 
               {/* Description */}
-              <p className="text-gray-300 leading-relaxed text-lg max-w-md">Connecting cultures through dance. Experience the vibrant world of Bollywood fusion with authentic choreography and passionate instruction in the heart of Glasgow.</p>
+              <p className="text-gray-300 leading-relaxed text-lg max-w-md">Connecting people through dance. Experience the vibrant world of Bollywood fusion with creative and trending choreography and passionate instruction in the heart of Glasgow.</p>
 
               {/* CTA Section */}
               <div className="space-y-4">
                 <p className="text-white font-semibold text-lg">Ready to start dancing?</p>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <Link href="/classes" className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#eb1c23] to-[#7b1c11] text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 group">
+                  <Link href="/classes#upcoming-classes" className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#eb1c23] to-[#7b1c11] text-white font-semibold rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 group">
                     <span>Book Your First Class</span>
                     <svg className="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                     </svg>
                   </Link>
-                  <Link href="/about" className="inline-flex items-center px-6 py-3 border-2 border-[#eb1c23] text-[#eb1c23] font-semibold rounded-xl hover:bg-[#eb1c23] hover:text-white transition-all duration-300">
+                  {/* <Link href="/about" className="inline-flex items-center px-6 py-3 border-2 border-[#eb1c23] text-[#eb1c23] font-semibold rounded-xl hover:bg-[#eb1c23] hover:text-white transition-all duration-300">
                     Meet Luna
-                  </Link>
+                  </Link> */}
                 </div>
               </div>
             </div>
@@ -148,7 +148,6 @@ export default function Footer() {
                 {[
                   { name: "Home", href: "/" },
                   { name: "Classes", href: "/classes" },
-                  { name: "About Luna", href: "/about" },
                   { name: "Contact", href: "/contact" },
                 ].map((item) => (
                   <li key={item.name}>

@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
-    const { classId, price, user } = await request.json();
+    const { classId, price, user, title, date, startTime, endTime, location, thumbnailUrl, description } = await request.json();
 
     // Call your backend API to create a Stripe checkout session
     const response = await fetch(`${process.env.NEXT_PUBLIC_STRAPI_URL}/api/stripe/create-checkout-session`, {
@@ -10,7 +10,7 @@ export async function POST(request: Request) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ classId, price, user }),
+      body: JSON.stringify({ classId, price, user, title, date, startTime, endTime, location, thumbnailUrl, description }),
     });
 
     const data = await response.json();

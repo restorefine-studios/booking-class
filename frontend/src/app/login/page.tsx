@@ -54,20 +54,32 @@ function LoginPageInner() {
   };
 
   return (
-    <div className="min-h-screen pt-16 flex items-center justify-center bg-gradient-to-br from-primary/5 to-bollywood-pink/5">
-      <div className="container mx-auto px-4 py-12">
+    <div className="min-h-screen pt-16 flex items-center justify-center bg-gradient-to-br from-orange-50 via-pink-50 to-orange-50 relative overflow-hidden">
+      {/* Decorative circles */}
+      <div className="absolute top-20 left-10 w-32 h-32 bg-gradient-to-br from-[#eb1c23]/10 to-[#7b1c11]/10 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-20 right-10 w-48 h-48 bg-gradient-to-br from-bollywood-pink/10 to-saffron/10 rounded-full blur-3xl"></div>
+      <div className="absolute top-1/2 left-1/4 w-24 h-24 bg-gradient-to-br from-saffron/10 to-bollywood-gold/10 rounded-full blur-2xl"></div>
+
+      <div className="container mx-auto px-4 py-12 relative z-10">
         <div className="max-w-md mx-auto">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold mb-2">
+            <div className="inline-block mb-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-[#eb1c23] to-[#7b1c11] rounded-2xl flex items-center justify-center shadow-xl transform rotate-6">
+                <svg className="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
+              </div>
+            </div>
+            <h1 className="text-4xl font-bold mb-3 text-gray-900">
               Welcome <span className="text-gradient">Back</span>
             </h1>
-            <p className="text-muted-foreground">Sign in to your Masala Moves account</p>
+            <p className="text-gray-600 text-lg">Sign in to continue your dance journey</p>
           </div>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Login</CardTitle>
-              <CardDescription>Enter your email and password to continue</CardDescription>
+          <Card className="bg-white/90 backdrop-blur-sm border-0 shadow-2xl rounded-3xl overflow-hidden">
+            <CardHeader className="bg-gradient-to-r from-[#eb1c23]/5 to-[#7b1c11]/5 pb-6">
+              <CardTitle className="text-2xl text-gray-900">Login</CardTitle>
+              <CardDescription className="text-gray-600">Enter your email and password to continue</CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -92,7 +104,12 @@ function LoginPageInner() {
                   </div>
                 </div>
 
-                <Button type="submit" className="w-full" size="lg" disabled={loginMutation.isPending}>
+                <Button
+                  type="submit"
+                  className="w-full bg-gradient-to-r from-[#eb1c23] to-[#7b1c11] hover:from-[#eb1c23]/90 hover:to-[#7b1c11]/90 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-300"
+                  size="lg"
+                  disabled={loginMutation.isPending}
+                >
                   {loginMutation.isPending ? (
                     <>
                       <Loader2 className="h-4 w-4 mr-2 animate-spin" />
@@ -115,14 +132,14 @@ function LoginPageInner() {
                 </div>
 
                 <div className="text-center text-sm">
-                  <span className="text-muted-foreground">Don&apos;t have an account? </span>
-                  <Link href="/signup" className="text-primary hover:underline font-medium">
+                  <span className="text-gray-600">Don&apos;t have an account? </span>
+                  <Link href="/signup" className="text-[#eb1c23] hover:text-[#7b1c11] font-semibold transition-colors">
                     Sign up
                   </Link>
                 </div>
 
                 <div className="text-center text-sm">
-                  <Link href="/forgot-password" className="text-muted-foreground hover:text-primary hover:underline">
+                  <Link href="/forgot-password" className="text-gray-500 hover:text-[#eb1c23] transition-colors">
                     Forgot your password?
                   </Link>
                 </div>
@@ -131,7 +148,7 @@ function LoginPageInner() {
           </Card>
 
           <div className="mt-8 text-center">
-            <Link href="/classes" className="text-sm text-muted-foreground hover:text-primary hover:underline">
+            <Link href="/classes" className="text-sm text-gray-600 hover:text-[#eb1c23] transition-colors font-medium">
               ← Back to Classes
             </Link>
           </div>

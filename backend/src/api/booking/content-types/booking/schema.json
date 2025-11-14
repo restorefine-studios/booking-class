@@ -10,7 +10,24 @@
   "options": {
     "draftAndPublish": true
   },
-  "pluginOptions": {},
+  "pluginOptions": {
+    "content-manager": {
+      "visible": true
+    },
+    "content-type-builder": {
+      "visible": true
+    }
+  },
+  "config": {
+    "attributes": {
+      "classOccurrence": {
+        "mainField": "title"
+      },
+      "user": {
+        "mainField": "email"
+      }
+    }
+  },
   "attributes": {
     "user": {
       "type": "relation",
@@ -29,9 +46,17 @@
       "type": "string",
       "required": true
     },
+    "stripeSessionId": {
+      "type": "string"
+    },
     "bookingDate": {
       "type": "datetime",
       "default": "2025-09-06T04:00:00.000Z"
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": ["pending", "confirmed", "cancelled"],
+      "default": "pending"
     },
     "notes": {
       "type": "text"

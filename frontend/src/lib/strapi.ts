@@ -65,8 +65,6 @@ export interface User {
   lastName: string;
   phone: string;
   address: string;
-  dateOfBirth: string;
-  gender: "male" | "female" | "non-binary" | "prefer-not-to-say";
   hearAboutUs: string;
 }
 
@@ -230,7 +228,7 @@ class StrapiAPI {
   }
 
   // Auth - Using Strapi's default APIs only
-  async register(userData: { username: string; email: string; password: string; firstName: string; lastName: string; phone: string; address: string; dateOfBirth: string; gender: string; hearAboutUs: string }): Promise<{ jwt: string; user: User }> {
+  async register(userData: { username: string; email: string; password: string; firstName: string; lastName: string; phone: string; address: string; hearAboutUs: string }): Promise<{ jwt: string; user: User }> {
     console.log("📡 Using Strapi's default APIs");
 
     // Step 1: Register with basic fields using default /auth/local/register
@@ -252,8 +250,6 @@ class StrapiAPI {
         lastName: userData.lastName,
         phone: userData.phone,
         address: userData.address,
-        dateOfBirth: userData.dateOfBirth,
-        gender: userData.gender,
         hearAboutUs: userData.hearAboutUs,
       });
 
@@ -269,8 +265,6 @@ class StrapiAPI {
           lastName: userData.lastName,
           phone: userData.phone,
           address: userData.address,
-          dateOfBirth: userData.dateOfBirth,
-          gender: userData.gender,
           hearAboutUs: userData.hearAboutUs,
         }),
       });
@@ -380,14 +374,21 @@ class StrapiAPI {
     });
   }
 
-  async getBookings(token?: string): Promise<StrapiResponse<Booking[]>> {
+  async getBookings(userId?: string): Promise<StrapiResponse<Booking[]>> {
+    const token = typeof window !== "undefined" ? localStorage.getItem("jwt") : null;
     const headers: Record<string, string> = {};
 
     if (token) {
       headers.Authorization = `Bearer ${token}`;
     }
 
-    return this.request("/bookings?populate=classOccurrence,user", {
+    // Filter by user if userId is provided
+    const endpoint = userId ? `/bookings?filters[user][id][$eq]=${userId}&populate=classOccurrence.thumbnail&sort=createdAt:desc` : "/bookings?populate=classOccurrence.thumbnail&sort=createdAt:desc";
+
+    console.log("📡 Fetching bookings for user:", userId, "with token:", !!token);
+    console.log("📡 Endpoint:", endpoint);
+
+    return this.request(endpoint, {
       headers,
     });
   }

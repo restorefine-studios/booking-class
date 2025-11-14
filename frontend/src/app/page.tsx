@@ -11,28 +11,28 @@ import { useState } from "react";
 export default function Home() {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const achievements = [
-    {
-      icon: Award,
-      title: "10+ Years Experience",
-      description: "Over a decade of teaching Bollywood and fusion dance",
-    },
-    {
-      icon: Users,
-      title: "500+ Students",
-      description: "Taught hundreds of students across all skill levels",
-    },
-    {
-      icon: Heart,
-      title: "Cultural Ambassador",
-      description: "Sharing the beauty of Indian culture through dance",
-    },
-    {
-      icon: Star,
-      title: "Performance Artist",
-      description: "Regular performances at cultural events and festivals",
-    },
-  ];
+  // const achievements = [
+  //   {
+  //     icon: Award,
+  //     title: "10+ Years Experience",
+  //     description: "Over a decade of teaching Bollywood and fusion dance",
+  //   },
+  //   {
+  //     icon: Users,
+  //     title: "500+ Students",
+  //     description: "Taught hundreds of students across all skill levels",
+  //   },
+  //   {
+  //     icon: Heart,
+  //     title: "Cultural Ambassador",
+  //     description: "Sharing the beauty of Indian culture through dance",
+  //   },
+  //   {
+  //     icon: Star,
+  //     title: "Performance Artist",
+  //     description: "Regular performances at cultural events and festivals",
+  //   },
+  // ];
 
   const features = [
     {
@@ -154,10 +154,10 @@ export default function Home() {
       </section>
 
       {/* Achievements Section */}
-      <section className="py-20 bg-white">
+      {/* <section className="py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3 xl md:text-4xl font-bold text-gray-900 mb-4">
               Achievements & <span className="text-gradient">Experience</span>
             </h2>
             <p className="text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto">A decade of dedication, passion, and countless moments of joy shared through dance</p>
@@ -179,7 +179,7 @@ export default function Home() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* CTA Section */}
       <section className="py-20 bg-gradient-to-br from-orange-50/30 to-pink-50/30">
@@ -201,7 +201,7 @@ export default function Home() {
                 </Button>
               </Link>
             </div>
-            <div className="mt-16">
+            {/* <div className="mt-16">
               <div className="flex justify-center items-center space-x-8 text-gray-600">
                 <div className="text-center">
                   <div className="text-2xl font-bold text-saffron">10+</div>
@@ -218,7 +218,7 @@ export default function Home() {
                   <div className="text-sm">Cultural Authenticity</div>
                 </div>
               </div>
-            </div>
+            </div> */}
 
             {/* Connect with us section */}
             <div className="mt-16 pt-8 border-t border-gray-200">

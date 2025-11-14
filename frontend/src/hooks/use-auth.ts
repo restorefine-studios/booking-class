@@ -17,8 +17,6 @@ interface RegisterData {
   lastName: string;
   phone: string;
   address: string;
-  dateOfBirth: string;
-  gender: string;
   hearAboutUs: string;
 }
 
@@ -30,8 +28,6 @@ interface User {
   lastName?: string;
   phone?: string;
   address?: string;
-  dateOfBirth?: string;
-  gender?: "male" | "female" | "non-binary" | "prefer-not-to-say";
   hearAboutUs?: string;
 }
 
