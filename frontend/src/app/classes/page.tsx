@@ -94,27 +94,27 @@ export default function ClassesPage() {
     }
   };
 
-  // if (isLoading) {
-  //   return (
-  //     <div className="min-h-screen pt-16 flex items-center justify-center">
-  //       <div className="text-center">
-  //         <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4 text-primary" />
-  //         <p className="text-muted-foreground">Loading classes...</p>
-  //       </div>
-  //     </div>
-  //   );
-  // }
+  if (isLoading) {
+    return (
+      <div className="min-h-screen pt-16 flex items-center justify-center">
+        <div className="text-center">
+          <Loader2 className="h-8 w-8 animate-spin mx-auto mb-4 text-primary" />
+          <p className="text-muted-foreground">Loading classes...</p>
+        </div>
+      </div>
+    );
+  }
 
-  // if (error) {
-  //   return (
-  //     <div className="min-h-screen pt-16 flex items-center justify-center">
-  //       <div className="text-center">
-  //         <p className="text-destructive mb-4">{error.message}</p>
-  //         <Button onClick={() => window.location.reload()}>Try Again</Button>
-  //       </div>
-  //     </div>
-  //   );
-  // }
+  if (error) {
+    return (
+      <div className="min-h-screen pt-16 flex items-center justify-center">
+        <div className="text-center">
+          <p className="text-destructive mb-4">{error.message}</p>
+          <Button onClick={() => window.location.reload()}>Try Again</Button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen pt-16">

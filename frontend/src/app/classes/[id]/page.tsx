@@ -96,6 +96,15 @@ export default function ClassDetailPage() {
       return;
     }
 
+    // Check if user is authenticated
+    if (!authState?.isAuthenticated || !authState?.user?.id) {
+      toast.error("Please log in to book a class");
+      router.push(`/login?returnUrl=/classes/${classIdOrSlug}`);
+      return;
+    }
+
+    console.log("📝 Creating booking for user:", authState.user.id);
+
     try {
       const response = await fetch("/api/stripe/create-checkout-session", {
         method: "POST",
@@ -106,6 +115,13 @@ export default function ClassDetailPage() {
           classId: classItem.id,
           price: classItem.price,
           user: authState?.user?.id || null,
+          title: classItem.title,
+          date: classItem.date,
+          startTime: classItem.startTime,
+          endTime: classItem.endTime,
+          location: classItem.location,
+          thumbnailUrl: classItem.thumbnail ? (classItem.thumbnail.url.startsWith("http") ? classItem.thumbnail.url : `${process.env.NEXT_PUBLIC_STRAPI_URL}${classItem.thumbnail.url}`) : null,
+          description: classItem.description,
         }),
       });
 

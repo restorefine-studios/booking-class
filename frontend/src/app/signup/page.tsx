@@ -85,20 +85,32 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen pt-16 flex items-center justify-center bg-gradient-to-br from-primary/5 to-bollywood-pink/5">
-      <div className="container mx-auto px-4 py-12">
+    <div className="min-h-screen pt-16 flex items-center justify-center bg-gradient-to-br from-orange-50 via-pink-50 to-orange-50 relative overflow-hidden">
+      {/* Decorative circles */}
+      <div className="absolute top-20 right-10 w-40 h-40 bg-gradient-to-br from-[#eb1c23]/10 to-[#7b1c11]/10 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-20 left-10 w-56 h-56 bg-gradient-to-br from-bollywood-pink/10 to-saffron/10 rounded-full blur-3xl"></div>
+      <div className="absolute top-1/3 right-1/4 w-32 h-32 bg-gradient-to-br from-saffron/10 to-bollywood-gold/10 rounded-full blur-2xl"></div>
+
+      <div className="container mx-auto px-4 py-12 relative z-10">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold mb-2">
+            <div className="inline-block mb-4">
+              <div className="w-16 h-16 bg-gradient-to-br from-[#eb1c23] to-[#7b1c11] rounded-2xl flex items-center justify-center shadow-xl transform -rotate-6">
+                <svg className="h-8 w-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
+                </svg>
+              </div>
+            </div>
+            <h1 className="text-4xl font-bold mb-3 text-gray-900">
               Join <span className="text-gradient">Masala Moves</span>
             </h1>
-            <p className="text-muted-foreground">Create your account and start your dance journey</p>
+            <p className="text-gray-600 text-lg">Create your account and start your dance journey</p>
           </div>
 
-          <Card>
-            <CardHeader>
-              <CardTitle>Sign Up</CardTitle>
-              <CardDescription>Fill in your details to create an account</CardDescription>
+          <Card className="bg-white/90 backdrop-blur-sm border-0 shadow-2xl rounded-3xl overflow-hidden">
+            <CardHeader className="bg-gradient-to-r from-[#eb1c23]/5 to-[#7b1c11]/5 pb-6">
+              <CardTitle className="text-2xl text-gray-900">Sign Up</CardTitle>
+              <CardDescription className="text-gray-600">Fill in your details to create an account</CardDescription>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -172,7 +184,12 @@ export default function SignupPage() {
                   </div>
                 </div>
 
-                <Button type="submit" className="w-full" size="lg" disabled={registerMutation.isPending}>
+                <Button
+                  type="submit"
+                  className="w-full bg-gradient-to-r from-[#eb1c23] to-[#7b1c11] hover:from-[#eb1c23]/90 hover:to-[#7b1c11]/90 text-white font-semibold shadow-lg hover:shadow-xl transform hover:scale-[1.02] transition-all duration-300"
+                  size="lg"
+                  disabled={registerMutation.isPending}
+                >
                   {registerMutation.isPending ? (
                     <>
                       <Loader2 className="h-4 w-4 mr-2 animate-spin" />
@@ -195,8 +212,8 @@ export default function SignupPage() {
                 </div>
 
                 <div className="text-center text-sm">
-                  <span className="text-muted-foreground">Already have an account? </span>
-                  <Link href="/login" className="text-primary hover:underline font-medium">
+                  <span className="text-gray-600">Already have an account? </span>
+                  <Link href="/login" className="text-[#eb1c23] hover:text-[#7b1c11] font-semibold transition-colors">
                     Sign in
                   </Link>
                 </div>
@@ -205,7 +222,7 @@ export default function SignupPage() {
           </Card>
 
           <div className="mt-8 text-center">
-            <Link href="/classes" className="text-sm text-muted-foreground hover:text-primary hover:underline">
+            <Link href="/classes" className="text-sm text-gray-600 hover:text-[#eb1c23] transition-colors font-medium">
               ← Back to Classes
             </Link>
           </div>

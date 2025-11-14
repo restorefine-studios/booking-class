@@ -90,11 +90,11 @@ function BookingSuccessPageInner() {
             </div>
 
             <div className="space-y-2">
-              <Button onClick={() => router.push("/classes")} className="w-full">
-                Browse More Classes
+              <Button onClick={() => router.push("/dashboard")} className="w-full bg-gradient-to-r from-[#eb1c23] to-[#7b1c11] hover:from-[#eb1c23]/90 hover:to-[#7b1c11]/90">
+                View My Bookings
               </Button>
-              <Button variant="outline" onClick={() => router.push("/")} className="w-full">
-                Back to Home
+              <Button variant="outline" onClick={() => router.push("/classes")} className="w-full">
+                Browse More Classes
               </Button>
             </div>
           </CardContent>

@@ -374,14 +374,21 @@ class StrapiAPI {
     });
   }
 
-  async getBookings(token?: string): Promise<StrapiResponse<Booking[]>> {
+  async getBookings(userId?: string): Promise<StrapiResponse<Booking[]>> {
+    const token = typeof window !== "undefined" ? localStorage.getItem("jwt") : null;
     const headers: Record<string, string> = {};
 
     if (token) {
       headers.Authorization = `Bearer ${token}`;
     }
 
-    return this.request("/bookings?populate=classOccurrence,user", {
+    // Filter by user if userId is provided
+    const endpoint = userId ? `/bookings?filters[user][id][$eq]=${userId}&populate=classOccurrence.thumbnail&sort=createdAt:desc` : "/bookings?populate=classOccurrence.thumbnail&sort=createdAt:desc";
+
+    console.log("📡 Fetching bookings for user:", userId, "with token:", !!token);
+    console.log("📡 Endpoint:", endpoint);
+
+    return this.request(endpoint, {
       headers,
     });
   }

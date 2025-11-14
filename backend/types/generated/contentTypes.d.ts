@@ -384,6 +384,14 @@ export interface ApiBookingBooking extends Struct.CollectionTypeSchema {
   options: {
     draftAndPublish: true;
   };
+  pluginOptions: {
+    'content-manager': {
+      visible: true;
+    };
+    'content-type-builder': {
+      visible: true;
+    };
+  };
   attributes: {
     bookingDate: Schema.Attribute.DateTime &
       Schema.Attribute.DefaultTo<'2025-09-06T04:00:00.000Z'>;
@@ -403,7 +411,12 @@ export interface ApiBookingBooking extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     notes: Schema.Attribute.Text;
     publishedAt: Schema.Attribute.DateTime;
+    status: Schema.Attribute.Enumeration<
+      ['pending', 'confirmed', 'cancelled']
+    > &
+      Schema.Attribute.DefaultTo<'pending'>;
     stripePaymentId: Schema.Attribute.String & Schema.Attribute.Required;
+    stripeSessionId: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
