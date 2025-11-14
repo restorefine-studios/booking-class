@@ -31,23 +31,38 @@ export default function ContactPage() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    setIsSubmitted(true);
-    setIsSubmitting(false);
-
-    // Reset form after 3 seconds
-    setTimeout(() => {
-      setIsSubmitted(false);
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        subject: "",
-        message: "",
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
       });
-    }, 3000);
+
+      if (!response.ok) {
+        throw new Error("Failed to send message");
+      }
+
+      setIsSubmitted(true);
+
+      // Reset form after 3 seconds
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          subject: "",
+          message: "",
+        });
+      }, 3000);
+    } catch (error) {
+      console.error("Error sending message:", error);
+      alert("Failed to send message. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -262,8 +277,8 @@ export default function ContactPage() {
             </div>
             <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-gray-900 via-[#eb1c23] to-gray-900 bg-clip-text text-transparent">Frequently Asked Questions</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Everything you need to know about starting your extraordinary Bollywood dance journey with Luna.
-              <span className="text-[#eb1c23] font-semibold"> Let&apos;s make your dreams dance!</span>
+              Everything you need to know about starting your Bollywood dance journey.
+              <span className="text-[#eb1c23] font-semibold"> Let&apos;s bring your dance dreams to life!</span>
             </p>
           </div>
 
@@ -281,7 +296,8 @@ export default function ContactPage() {
                   </div>
                 </div>
                 <p className="text-gray-600 leading-relaxed text-base">
-                  Absolutely not! Luna&apos;s classes welcome dancers of all levels - from those who&apos;ve never danced before to experienced performers. Luna&apos;s teaching approach adapts to each student, ensuring everyone feels comfortable and progresses at their own pace.
+                  Absolutely not! Our classes welcome dancers of all levels even if you have never danced before. Luna Shree believes in everyone&rsquo;s individuality shining through their own moves and her teaching approach adapts to each student, ensuring everyone feels comfortable and progresses
+                  at their own pace.
                 </p>
               </CardContent>
             </Card>
@@ -299,7 +315,8 @@ export default function ContactPage() {
                   </div>
                 </div>
                 <p className="text-gray-600 leading-relaxed text-base">
-                  Comfort is key! Wear breathable, stretchy clothing that allows free movement - think athletic wear, loose pants, or comfortable skirts. Bring water, a towel, and wear shoes with good grip. Many students love wearing colorful outfits to match the vibrant Bollywood spirit!
+                  Each weekly classes are posted with outfit themes if you would like to bring the vibe along with you. However, Comfort is key! Wear what you feel comfortable in, the outfit themes aren&apos;t compulsory! There are changing rooms available in the studio if you would like to change
+                  before/after class.
                 </p>
               </CardContent>
             </Card>

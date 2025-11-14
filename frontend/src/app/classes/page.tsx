@@ -119,8 +119,8 @@ export default function ClassesPage() {
   return (
     <div className="min-h-screen pt-16">
       {/* Hero Section */}
-      <section className="relative py-20 bg-cover bg-center bg-no-repeat" style={{ backgroundImage: "url(/label1.png)" }}>
-        {/* <div className="absolute inset-0 bg-black/50"></div> */}
+      <section className="relative py-20 bg-cover bg-center bg-no-repeat bg-[url(/label1-mobile.png)] md:bg-[url(/label1.png)]">
+        <div className="absolute inset-0 bg-black/50"></div>
         <div className="relative container mx-auto px-4 text-center">
           <div className="inline-flex items-center space-x-2 mb-6">
             <div className="w-12 h-12 bg-gradient-to-br from-[#eb1c23] to-[#7b1c11] rounded-2xl flex items-center justify-center shadow-lg">

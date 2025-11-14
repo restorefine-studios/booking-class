@@ -13,9 +13,11 @@ import { toast } from "@/lib/toast";
 import Image from "next/image";
 import Link from "next/link";
 import { Calendar, MapPin, Clock, Users, Loader2, ArrowLeft } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function ClassDetailPage() {
   const params = useParams();
+  const router = useRouter();
   const classIdOrSlug = params.id as string;
 
   // Use TanStack Query hooks
