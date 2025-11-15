@@ -17,6 +17,12 @@ function DashboardContent() {
   const { data: authState, isLoading: authLoading } = useAuthState();
   const { data: bookingsData, isLoading: bookingsLoading, refetch: refetchBookings } = useBookings(authState?.user?.id?.toString());
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [isClient, setIsClient] = useState(false);
+
+  // Ensure we're on the client before showing any dynamic content
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   useEffect(() => {
     if (!authLoading && !authState?.isAuthenticated) {
@@ -93,18 +99,6 @@ function DashboardContent() {
     });
   };
 
-  if (authLoading) {
-    return (
-      <div className="min-h-screen pt-16 flex items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
-      </div>
-    );
-  }
-
-  if (!authState?.isAuthenticated) {
-    return null;
-  }
-
   const bookings = bookingsData?.data || [];
   const upcomingBookings = bookings.filter((booking: Booking) => {
     const classDate = new Date(booking.classOccurrence?.date || "");
@@ -116,11 +110,31 @@ function DashboardContent() {
     return classDate < new Date() || booking.status !== "confirmed";
   });
 
+  // Show loading state
+  if (authLoading || !isClient) {
+    return (
+      <div className="min-h-screen pt-16 bg-gradient-to-br from-orange-50 via-pink-50 to-orange-50">
+        <div className="container mx-auto px-4 py-12 flex items-center justify-center min-h-[60vh]">
+          <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        </div>
+      </div>
+    );
+  }
+
+  // Redirect handled by useEffect, show nothing while redirecting
+  if (!authState?.isAuthenticated) {
+    return (
+      <div className="min-h-screen pt-16 bg-gradient-to-br from-orange-50 via-pink-50 to-orange-50">
+        <div className="container mx-auto px-4 py-12" />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen pt-16 bg-gradient-to-br from-orange-50 via-pink-50 to-orange-50">
       <div className="container mx-auto px-4 py-12">
         {/* Success Message */}
-        {showSuccessMessage && (
+        {isClient && showSuccessMessage && (
           <div className="mb-8 animate-in fade-in slide-in-from-top-5 duration-500">
             <Card className="bg-gradient-to-r from-green-50 to-emerald-50 border-green-200 shadow-xl">
               <CardContent className="flex items-center gap-4 p-6">
