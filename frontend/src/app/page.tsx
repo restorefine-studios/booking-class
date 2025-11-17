@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
-import { Calendar, Users, Award, Heart, ChevronDown, ChevronUp, Instagram, Youtube, Star } from "lucide-react";
+import { Calendar, Users, Award, Heart, ChevronDown, ChevronUp, Instagram, Youtube } from "lucide-react";
 import { useState } from "react";
 
 export default function Home() {
