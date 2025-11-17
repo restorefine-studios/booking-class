@@ -15,6 +15,16 @@ const nextConfig: NextConfig = {
         pathname: "/uploads/**",
       },
       {
+        protocol: "http",
+        hostname: "backend.masalamoves.co.uk",
+        pathname: "/uploads/**",
+      },
+      {
+        protocol: "https",
+        hostname: "backend.masalamoves.co.uk",
+        pathname: "/uploads/**",
+      },
+      {
         protocol: "https",
         hostname: "98.88.37.45",
         pathname: "/uploads/**",
