@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
+import { sendBookingConfirmationEmail } from "@/lib/email";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2023-10-16",
@@ -30,6 +31,18 @@ export async function POST(request: NextRequest) {
           const strapiUrl = process.env.NEXT_PUBLIC_STRAPI_URL;
           const strapiToken = process.env.STRAPI_API_TOKEN;
 
+          // First, get the booking details
+          const bookingResponse = await fetch(`${strapiUrl}/api/bookings/${bookingId}?populate=classOccurrence,user`, {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${strapiToken}`,
+            },
+          });
+
+          const bookingData = await bookingResponse.json();
+          const booking = bookingData.data;
+
+          // Update booking status
           await fetch(`${strapiUrl}/api/bookings/${bookingId}`, {
             method: "PUT",
             headers: {
@@ -44,7 +57,43 @@ export async function POST(request: NextRequest) {
             }),
           });
 
-          console.log("Booking confirmed via webhook:", bookingId);
+          console.log("✅ Booking confirmed via webhook:", bookingId);
+
+          // Send confirmation email
+          try {
+            const userEmail = booking.user?.email || paymentIntent.receipt_email;
+            const userName = booking.user ? `${booking.user.firstName} ${booking.user.lastName}` : paymentIntent.metadata.customerName || "Customer";
+            const className = booking.classOccurrence?.title || "Dance Class";
+            const classDate = booking.classOccurrence?.date
+              ? new Date(booking.classOccurrence.date).toLocaleDateString("en-GB", {
+                  weekday: "long",
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })
+              : "TBD";
+            const classTime = booking.classOccurrence?.startTime && booking.classOccurrence?.endTime ? `${booking.classOccurrence.startTime} - ${booking.classOccurrence.endTime}` : "TBD";
+
+            if (userEmail) {
+              await sendBookingConfirmationEmail({
+                to: userEmail,
+                customerName: userName,
+                className: className,
+                classDate: classDate,
+                classTime: classTime,
+                amount: paymentIntent.amount,
+                bookingId: bookingId,
+                currency: paymentIntent.currency.toUpperCase(),
+              });
+
+              console.log("✅ Confirmation email sent to:", userEmail);
+            } else {
+              console.warn("⚠️ No email address found for booking:", bookingId);
+            }
+          } catch (emailError) {
+            console.error("❌ Error sending confirmation email:", emailError);
+            // Don't fail the webhook if email fails
+          }
         } catch (error) {
           console.error("Error updating booking via webhook:", error);
         }

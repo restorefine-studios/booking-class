@@ -372,7 +372,9 @@ export default function ClassesPage() {
                                   <Users className="h-4 w-4 text-[#eb1c23]" />
                                 </div>
                                 <div>
-                                  <p className="text-sm font-semibold text-gray-900">{classItem.maxCapacity} spots</p>
+                                  <p className="text-sm font-semibold text-gray-900">
+                                    {classItem.maxCapacity - (classItem.bookedCount || 0)} / {classItem.maxCapacity} spots
+                                  </p>
                                   <p className="text-xs text-gray-500">Available</p>
                                 </div>
                               </div>

@@ -29,13 +29,7 @@ export default function Footer() {
               {/* Logo and Brand */}
               <div className="flex items-center space-x-4">
                 <div className="relative">
-                  <Image 
-                    src="/logo.svg" 
-                    alt="Masala Moves Logo" 
-                    width={80} 
-                    height={80} 
-                    className="transform hover:scale-110 transition-transform duration-300"
-                  />
+                  <Image src="/logo.svg" alt="Masala Moves Logo" width={80} height={80} className="transform hover:scale-110 transition-transform duration-300" />
                   <div className="absolute -inset-2 bg-gradient-to-r from-[#eb1c23]/30 to-[#7b1c11]/30 rounded-2xl blur-lg opacity-0 hover:opacity-60 transition-opacity duration-300"></div>
                 </div>
               </div>
@@ -91,7 +85,7 @@ export default function Footer() {
                   </div>
                   <div>
                     <p className="text-white font-medium">Email</p>
-                    <p className="text-gray-400 text-sm mt-1">nepallunashree@gmail.com</p>
+                    <p className="text-gray-400 text-sm mt-1">info@masalamoves.co.uk</p>
                   </div>
                 </div>
               </div>

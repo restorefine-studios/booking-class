@@ -1,4 +1,5 @@
 import Stripe from "stripe";
+import { Resend } from "resend";
 
 export default {
   async createCheckoutSession(ctx) {
@@ -238,6 +239,133 @@ export default {
             console.log("✅ Status:", bookingData.status);
             console.log("\n✅ User can now see this booking in their dashboard");
             console.log("=".repeat(80) + "\n");
+
+            // Send confirmation email
+            try {
+              console.log("📧 Sending confirmation email...");
+
+              // Get class details
+              const classDetails = await strapi.entityService.findOne("api::class-occurrence.class-occurrence", bookingData.classOccurrence);
+
+              // Get user details
+              const userDetails = await strapi.query("plugin::users-permissions.user").findOne({
+                where: { id: bookingData.user },
+              });
+
+              if (!userDetails?.email) {
+                console.warn("⚠️ No email found for user:", bookingData.user);
+                return;
+              }
+
+              const customerName = `${userDetails.firstName || ""} ${userDetails.lastName || ""}`.trim() || userDetails.username;
+              const classDate = classDetails?.date
+                ? new Date(classDetails.date).toLocaleDateString("en-GB", {
+                    weekday: "long",
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })
+                : "TBD";
+              const classTime = classDetails?.startTime && classDetails?.endTime ? `${classDetails.startTime} - ${classDetails.endTime}` : "TBD";
+              const className = classDetails?.title || "Dance Class";
+              const formattedAmount = new Intl.NumberFormat("en-GB", {
+                style: "currency",
+                currency: session.currency.toUpperCase(),
+              }).format(session.amount_total / 100);
+
+              const resend = new Resend(process.env.RESEND_API_KEY);
+
+              const emailHtml = `
+                <!DOCTYPE html>
+                <html>
+                  <head>
+                    <meta charset="utf-8">
+                    <title>Booking Confirmation</title>
+                  </head>
+                  <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
+                    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; text-align: center; border-radius: 10px 10px 0 0;">
+                      <h1 style="color: white; margin: 0; font-size: 28px;">Booking Confirmed! 🎉</h1>
+                    </div>
+                    
+                    <div style="background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px; border: 1px solid #e0e0e0;">
+                      <p style="font-size: 16px; margin-bottom: 20px;">Dear ${customerName},</p>
+                      
+                      <p style="font-size: 16px; margin-bottom: 25px;">
+                        Thank you for booking with Masala Moves! Your payment has been successfully processed and your class booking is confirmed.
+                      </p>
+                      
+                      <div style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 25px; border-left: 4px solid #667eea;">
+                        <h2 style="color: #667eea; margin-top: 0; font-size: 20px;">Booking Details</h2>
+                        
+                        <table style="width: 100%; border-collapse: collapse;">
+                          <tr>
+                            <td style="padding: 10px 0; border-bottom: 1px solid #e0e0e0;"><strong>Class:</strong></td>
+                            <td style="padding: 10px 0; border-bottom: 1px solid #e0e0e0; text-align: right;">${className}</td>
+                          </tr>
+                          <tr>
+                            <td style="padding: 10px 0; border-bottom: 1px solid #e0e0e0;"><strong>Date:</strong></td>
+                            <td style="padding: 10px 0; border-bottom: 1px solid #e0e0e0; text-align: right;">${classDate}</td>
+                          </tr>
+                          <tr>
+                            <td style="padding: 10px 0; border-bottom: 1px solid #e0e0e0;"><strong>Time:</strong></td>
+                            <td style="padding: 10px 0; border-bottom: 1px solid #e0e0e0; text-align: right;">${classTime}</td>
+                          </tr>
+                          <tr>
+                            <td style="padding: 10px 0; border-bottom: 1px solid #e0e0e0;"><strong>Amount Paid:</strong></td>
+                            <td style="padding: 10px 0; border-bottom: 1px solid #e0e0e0; text-align: right; color: #10b981; font-weight: bold;">${formattedAmount}</td>
+                          </tr>
+                          <tr>
+                            <td style="padding: 10px 0;"><strong>Booking Reference:</strong></td>
+                            <td style="padding: 10px 0; text-align: right; font-family: monospace; color: #667eea;">#${booking.id}</td>
+                          </tr>
+                        </table>
+                      </div>
+                      
+                      <div style="background: #fff3cd; border: 1px solid #ffc107; padding: 15px; border-radius: 8px; margin-bottom: 25px;">
+                        <p style="margin: 0; font-size: 14px; color: #856404;">
+                          <strong>📌 Important:</strong> Please arrive 10 minutes before the class starts. Bring comfortable clothing and water.
+                        </p>
+                      </div>
+                      
+                      <p style="font-size: 16px; margin-bottom: 20px;">
+                        If you have any questions or need to make changes to your booking, please don't hesitate to contact us.
+                      </p>
+                      
+                      <p style="font-size: 16px; margin-bottom: 5px;">See you on the dance floor! 💃</p>
+                      <p style="font-size: 16px; margin-top: 5px;">
+                        <strong>The Masala Moves Team</strong>
+                      </p>
+                    </div>
+                    
+                    <div style="text-align: center; padding: 20px; color: #666; font-size: 12px;">
+                      <p style="margin: 5px 0;">
+                        This is an automated confirmation email. Please do not reply to this email.
+                      </p>
+                      <p style="margin: 5px 0;">
+                        © ${new Date().getFullYear()} Masala Moves. All rights reserved.
+                      </p>
+                    </div>
+                  </body>
+                </html>
+              `;
+
+              const { data: emailData, error: emailError } = await resend.emails.send({
+                from: "Masala Moves <no-reply@masalamoves.co.uk>", // Resend's test sender
+                to: [userDetails.email],
+                subject: `Booking Confirmed - ${className} on ${classDate}`,
+                html: emailHtml,
+              });
+
+              if (emailError) {
+                console.error("❌ Error sending email:", emailError);
+              } else {
+                console.log("✅ Confirmation email sent successfully to:", userDetails.email);
+                console.log("📧 Email ID:", emailData?.id);
+              }
+            } catch (emailError) {
+              console.error("❌ Failed to send confirmation email:", emailError);
+              // Don't fail the webhook if email fails
+            }
           } catch (error) {
             console.error("\n" + "=".repeat(80));
             console.error("❌ BOOKING CREATION FAILED!");

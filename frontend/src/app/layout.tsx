@@ -19,6 +19,10 @@ export const metadata: Metadata = {
   title: "Masala Moves - Bollywood Dance Classes in Glasgow",
   description: "Join Luna Shree for authentic Bollywood fusion dance classes in Glasgow. Experience the joy of movement, rhythm, and culture through dance.",
   keywords: "bollywood dance, glasgow, dance classes, luna shree, masala moves, fusion dance",
+  icons: {
+    icon: "/favicon.ico",
+    apple: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({
