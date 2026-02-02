@@ -35,4 +35,29 @@ export default factories.createCoreController("api::class-occurrence.class-occur
     // Default behavior
     return super.find(ctx);
   },
+
+  // Find class by slug
+  async findBySlug(ctx) {
+    const { slug } = ctx.params;
+
+    try {
+      const results = await strapi.entityService.findMany("api::class-occurrence.class-occurrence", {
+        filters: {
+          slug: {
+            $eq: slug,
+          },
+        },
+        populate: ["bookings", "thumbnail", "songThumbnail"],
+      });
+
+      if (!results || results.length === 0) {
+        return ctx.notFound("Class not found");
+      }
+
+      // Return the first matching class
+      return { data: results[0] };
+    } catch (error) {
+      ctx.throw(500, error);
+    }
+  },
 }));
