@@ -10,6 +10,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Eye, EyeOff, Loader2, Lock } from "lucide-react";
 import { toast } from "@/lib/toast";
 
+export const dynamic = "force-dynamic";
+
 function ResetPasswordInner() {
   const router = useRouter();
   const searchParams = useSearchParams();
