@@ -143,8 +143,8 @@ export default function SignupPage() {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="address">Address</Label>
-                  <Input id="address" name="address" type="text" value={formData.address} onChange={handleInputChange} required placeholder="123 Main Street, London, UK" disabled={registerMutation.isPending} />
+                  <Label htmlFor="address">Address (Optional)</Label>
+                  <Input id="address" name="address" type="text" value={formData.address} onChange={handleInputChange} placeholder="123 Main Street, London, UK" disabled={registerMutation.isPending} />
                 </div>
 
                 <div className="space-y-2">

@@ -13,13 +13,8 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
-    // Send email using Resend
-    const { data, error } = await resend.emails.send({
-      from: "Luna Shree Dance <onboarding@resend.dev>", // Change this to your verified domain
-      to: [process.env.CONTACT_EMAIL || "prabish.atkans@gmail.com"], // Your email address
-      replyTo: email, // Customer's email for easy replies
-      subject: `New Contact Form: ${subject || "General Inquiry"}`,
-      html: `
+    // Prepare email content with unique subjects
+    const htmlContent = `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <div style="background: linear-gradient(135deg, #eb1c23 0%, #7b1c11 100%); padding: 30px; border-radius: 10px 10px 0 0;">
             <h1 style="color: white; margin: 0; font-size: 24px;">New Contact Form Submission</h1>
@@ -50,12 +45,34 @@ export async function POST(request: NextRequest) {
             <p>Sent from Luna Shree Dance Contact Form</p>
           </div>
         </div>
-      `,
+      `;
+
+    // Send email to no-reply@masalamoves.co.uk
+    const { data, error } = await resend.emails.send({
+      from: "Luna Shree Dance <no-reply@masalamoves.co.uk>",
+      to: ["no-reply@masalamoves.co.uk"],
+      replyTo: email,
+      subject: `New Contact: ${subject || "General Inquiry"} - ${name} (${email})`,
+      html: htmlContent,
     });
 
     if (error) {
-      console.error("Resend error:", error);
+      console.error("Resend error to no-reply:", error);
       return NextResponse.json({ error: "Failed to send email" }, { status: 500 });
+    }
+
+    // Send a copy to nepallunashree@gmail.com with a different subject
+    const { error: secondError } = await resend.emails.send({
+      from: "Luna Shree Dance <no-reply@masalamoves.co.uk>",
+      to: ["nepallunashree@gmail.com"],
+      replyTo: email,
+      subject: `Contact Form: ${name} (${email}) - ${subject || "General Inquiry"}`,
+      html: htmlContent,
+    });
+
+    if (secondError) {
+      console.error("Resend error to nepallunashree:", secondError);
+      // Don't fail the request if the second email fails
     }
 
     return NextResponse.json({ success: true, messageId: data?.id }, { status: 200 });

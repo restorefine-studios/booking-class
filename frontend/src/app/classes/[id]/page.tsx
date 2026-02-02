@@ -1,11 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import { useParams } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { useClassByIdOrSlug } from "@/hooks/use-classes";
 import { useAuthState } from "@/hooks/use-auth";
 import { getStrapiMediaURL, type ClassOccurrence } from "@/lib/strapi";
@@ -25,13 +22,6 @@ export default function ClassDetailPage() {
   const { data: authState } = useAuthState();
 
   const classItem = classResponse?.data;
-
-  const [bookingType, setBookingType] = useState<"login" | "guest" | null>(null);
-  const [guestForm, setGuestForm] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-  });
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
@@ -237,7 +227,9 @@ export default function ClassDetailPage() {
                         {classItem.maxCapacity && (
                           <div className="flex items-center text-gray-600">
                             <Users className="h-4 w-4 mr-2 text-bollywood-pink" />
-                            <span>{classItem.maxCapacity} spots available</span>
+                            <span>
+                              {classItem.maxCapacity - (classItem.bookedCount || 0)} / {classItem.maxCapacity} spots available
+                            </span>
                           </div>
                         )}
                       </div>
@@ -282,47 +274,23 @@ export default function ClassDetailPage() {
                       </div>
                     </div>
                   ) : (
-                    <>
-                      {!bookingType ? (
-                        <div className="space-y-4">
-                          <p className="text-gray-600 text-sm">Choose how you&apos;d like to proceed with your booking:</p>
-                          <div className="space-y-3">
-                            <Button onClick={handleBooking} className="w-full justify-center bg-gradient-to-r from-saffron to-bollywood-pink hover:from-saffron/90 hover:to-bollywood-pink/90 text-white font-medium">
-                              Sign In to Book
-                            </Button>
-                            <Button onClick={() => setBookingType("guest")} variant="outline" className="w-full justify-center border-gray-300 hover:border-saffron hover:bg-saffron/5">
-                              Continue as Guest
-                            </Button>
-                          </div>
-                        </div>
-                      ) : (
-                        <div className="space-y-4">
-                          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div>
-                              <Label htmlFor="firstName" className="text-sm font-medium text-gray-700">
-                                First Name *
-                              </Label>
-                              <Input id="firstName" value={guestForm.firstName} onChange={(e) => setGuestForm((prev) => ({ ...prev, firstName: e.target.value }))} placeholder="Enter first name" className="mt-1 focus:border-saffron focus:ring-saffron/20" required />
-                            </div>
-                            <div>
-                              <Label htmlFor="lastName" className="text-sm font-medium text-gray-700">
-                                Last Name *
-                              </Label>
-                              <Input id="lastName" value={guestForm.lastName} onChange={(e) => setGuestForm((prev) => ({ ...prev, lastName: e.target.value }))} placeholder="Enter last name" className="mt-1 focus:border-saffron focus:ring-saffron/20" required />
-                            </div>
-                          </div>
-                          <div>
-                            <Label htmlFor="email" className="text-sm font-medium text-gray-700">
-                              Email Address *
-                            </Label>
-                            <Input id="email" type="email" value={guestForm.email} onChange={(e) => setGuestForm((prev) => ({ ...prev, email: e.target.value }))} placeholder="Enter email address" className="mt-1 focus:border-saffron focus:ring-saffron/20" required />
-                          </div>
-                          <Button onClick={() => setBookingType(null)} variant="ghost" className="text-sm text-gray-600 hover:text-gray-800">
-                            ← Back to options
+                    <div className="space-y-4">
+                      <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-4">
+                        <p className="text-sm text-blue-800">
+                          <strong>Account Required:</strong> You need to sign in or create an account to book this class.
+                        </p>
+                      </div>
+                      <div className="space-y-3">
+                        <Link href={`/login?returnUrl=/classes/${classIdOrSlug}`} className="block">
+                          <Button className="w-full justify-center bg-gradient-to-r from-[#eb1c23] to-[#7b1c11] hover:from-[#eb1c23]/90 hover:to-[#7b1c11]/90 text-white font-semibold">Sign In to Book</Button>
+                        </Link>
+                        <Link href="/signup" className="block">
+                          <Button variant="outline" className="w-full justify-center border-gray-300 hover:border-[#eb1c23] hover:bg-[#eb1c23]/5">
+                            Create Account
                           </Button>
-                        </div>
-                      )}
-                    </>
+                        </Link>
+                      </div>
+                    </div>
                   )}
                 </CardContent>
               </Card>
@@ -360,13 +328,17 @@ export default function ClassDetailPage() {
 
                     {/* Complete Booking Button */}
                     <div className="pt-4">
-                      {authState?.isAuthenticated || (bookingType === "guest" && guestForm.firstName && guestForm.lastName && guestForm.email) ? (
+                      {authState?.isAuthenticated ? (
                         <Button onClick={handleBooking} className="w-full bg-gradient-to-r from-saffron to-bollywood-pink hover:from-saffron/90 hover:to-bollywood-pink/90 text-white font-semibold py-3 shadow-lg hover:shadow-xl transition-all duration-300" size="lg">
                           Complete Booking
                         </Button>
                       ) : (
-                        <Button disabled className="w-full bg-gray-300 text-gray-500 font-semibold py-3 cursor-not-allowed" size="lg">
-                          Complete Customer Info
+                        <Button
+                          onClick={() => router.push(`/login?returnUrl=/classes/${classIdOrSlug}`)}
+                          className="w-full bg-gradient-to-r from-[#eb1c23] to-[#7b1c11] hover:from-[#eb1c23]/90 hover:to-[#7b1c11]/90 text-white font-semibold py-3 shadow-lg hover:shadow-xl transition-all duration-300"
+                          size="lg"
+                        >
+                          Login to Book
                         </Button>
                       )}
                     </div>
@@ -380,10 +352,6 @@ export default function ClassDetailPage() {
                       <div className="flex items-center">
                         <div className="w-2 h-2 bg-blue-500 rounded-full mr-2"></div>
                         <span>Instant Confirmation</span>
-                      </div>
-                      <div className="flex items-center">
-                        <div className="w-2 h-2 bg-orange-500 rounded-full mr-2"></div>
-                        <span>24hr Cancellation</span>
                       </div>
                     </div>
                   </CardContent>

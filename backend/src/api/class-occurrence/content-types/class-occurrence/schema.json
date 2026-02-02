@@ -49,6 +49,11 @@
       "default": 20,
       "required": true
     },
+    "bookedCount": {
+      "type": "integer",
+      "default": 0,
+      "required": true
+    },
     "price": {
       "type": "decimal",
       "required": true

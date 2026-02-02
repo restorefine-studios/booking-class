@@ -146,7 +146,13 @@ export function useRegister() {
     },
     onError: (error: Error) => {
       console.error("Registration error:", error);
-      toast.error("Registration failed. Please try again or contact support.");
+      // Check if the error message indicates account already exists
+      const errorMsg = error.message.toLowerCase();
+      if ((errorMsg.includes("email") && errorMsg.includes("already taken")) || (errorMsg.includes("username") && errorMsg.includes("already taken")) || errorMsg.includes("already exists")) {
+        toast.error("Account already exists. Please log in instead.");
+      } else {
+        toast.error(error.message || "Registration failed. Please try again or contact support.");
+      }
     },
   });
 }

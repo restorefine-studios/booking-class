@@ -102,6 +102,7 @@ export interface ClassOccurrence {
   startTime: string;
   endTime: string;
   maxCapacity: number;
+  bookedCount?: number;
   price: number;
   level: "BEGINNER" | "INTERMEDIATE" | "ADVANCED";
   instructor: string;
@@ -220,6 +221,21 @@ class StrapiAPI {
     if (!response.ok) {
       const errorBody = await response.text();
       console.error(`HTTP ${response.status} for ${endpoint}:`, errorBody);
+
+      // Try to parse Strapi error format
+      try {
+        const errorData = JSON.parse(errorBody);
+        if (errorData.error?.message) {
+          throw new Error(errorData.error.message);
+        }
+      } catch (parseError) {
+        // If JSON parsing fails or no error message, use the original error
+        if (parseError instanceof Error && parseError.message) {
+          // Re-throw if it's our intentional error
+          throw parseError;
+        }
+      }
+
       throw new Error(`HTTP ${response.status}: ${response.statusText}`);
     }
 
