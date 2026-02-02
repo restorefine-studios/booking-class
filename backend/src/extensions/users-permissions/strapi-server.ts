@@ -55,50 +55,65 @@ module.exports = (plugin) => {
 
       console.log("🔗 Reset URL generated:", resetUrl);
 
-      // Email HTML template
+      // Email HTML template with enhanced design
       const emailHtml = `
         <!DOCTYPE html>
         <html>
           <head>
             <meta charset="utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Reset Your Password</title>
+            <title>Reset Your Password - Masala Moves</title>
           </head>
-          <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; max-width: 600px; margin: 0 auto; padding: 20px;">
-            <div style="background: linear-gradient(135deg, #eb1c23 0%, #7b1c11 100%); padding: 30px; text-align: center; border-radius: 10px 10px 0 0;">
-              <h1 style="color: white; margin: 0; font-size: 28px;">Password Reset Request</h1>
-            </div>
-            
-            <div style="background: #f9f9f9; padding: 30px; border-radius: 0 0 10px 10px; border: 1px solid #e0e0e0;">
-              <p style="font-size: 16px; margin-bottom: 20px;">Hello ${user.firstName || user.username},</p>
-              
-              <p style="font-size: 16px; margin-bottom: 25px;">
-                We received a request to reset your password for your Masala Moves account. Click the button below to choose a new password:
-              </p>
-              
-              <div style="text-align: center; margin: 30px 0;">
-                <a href="${resetUrl}" style="display: inline-block; padding: 15px 30px; background: linear-gradient(135deg, #eb1c23 0%, #7b1c11 100%); color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 16px;">Reset Password</a>
+          <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background: linear-gradient(135deg, #fef5f5 0%, #fff5f0 100%);">
+            <div style="max-width: 600px; margin: 0 auto; padding: 40px 20px;">
+              <div style="background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(235, 28, 35, 0.15);">
+                <div style="background: linear-gradient(135deg, #eb1c23 0%, #7b1c11 100%); padding: 40px 30px; text-align: center; position: relative;">
+                  <div style="position: absolute; top: -20px; right: -20px; width: 100px; height: 100px; background: rgba(255,255,255,0.1); border-radius: 50%; filter: blur(40px);"></div>
+                  <div style="position: absolute; bottom: -30px; left: -30px; width: 150px; height: 150px; background: rgba(0,0,0,0.1); border-radius: 50%; filter: blur(50px);"></div>
+                  <div style="position: relative;">
+                    <h1 style="color: white; margin: 0 0 10px 0; font-size: 32px; font-weight: 700; letter-spacing: -0.5px;">🔐 Password Reset</h1>
+                    <p style="color: rgba(255,255,255,0.9); margin: 0; font-size: 16px;">Masala Moves Dance Academy</p>
+                  </div>
+                </div>
+                <div style="padding: 40px 30px;">
+                  <div style="text-align: center; margin-bottom: 30px;">
+                    <div style="display: inline-block; background: linear-gradient(135deg, #fff5f0 0%, #fef5f5 100%); padding: 20px; border-radius: 50%; margin-bottom: 20px;">
+                      <span style="font-size: 48px;">💃</span>
+                    </div>
+                    <p style="font-size: 18px; color: #333; margin: 0 0 10px 0; font-weight: 600;">Hello ${user.firstName || user.username}!</p>
+                    <p style="font-size: 15px; color: #666; margin: 0; line-height: 1.6;">We received a request to reset your password.<br/>No worries, we've got you covered!</p>
+                  </div>
+                  <div style="background: linear-gradient(135deg, #fef5f5 0%, #fff5f0 100%); padding: 25px; border-radius: 15px; margin: 30px 0; border-left: 4px solid #eb1c23;">
+                    <p style="margin: 0 0 20px 0; font-size: 15px; color: #555; line-height: 1.6;">Click the button below to create a new password for your account:</p>
+                    <div style="text-align: center; margin: 25px 0;">
+                      <a href="${resetUrl}" style="display: inline-block; padding: 16px 40px; background: linear-gradient(135deg, #eb1c23 0%, #7b1c11 100%); color: white; text-decoration: none; border-radius: 50px; font-weight: 700; font-size: 16px; box-shadow: 0 4px 15px rgba(235, 28, 35, 0.3);">Reset My Password</a>
+                    </div>
+                    <p style="margin: 20px 0 0 0; font-size: 13px; color: #888; text-align: center;">Button not working? Copy and paste this link:</p>
+                    <p style="margin: 10px 0 0 0; font-size: 12px; word-break: break-all; text-align: center;">
+                      <a href="${resetUrl}" style="color: #eb1c23; text-decoration: none;">${resetUrl}</a>
+                    </p>
+                  </div>
+                  <div style="background: #fff3cd; border: 2px solid #ffc107; border-radius: 12px; padding: 20px; margin: 25px 0;">
+                    <p style="margin: 0; font-size: 14px; color: #856404; line-height: 1.6;">
+                      <strong>⚠️ Security Notice:</strong><br/>
+                      • This link expires in <strong>1 hour</strong><br/>
+                      • If you didn't request this, please ignore this email<br/>
+                      • Never share this link with anyone
+                    </p>
+                  </div>
+                  <div style="text-align: center; padding: 20px 0; border-top: 1px solid #f0f0f0; margin-top: 30px;">
+                    <p style="margin: 0 0 10px 0; font-size: 14px; color: #666;">Need help? Contact us at</p>
+                    <p style="margin: 0;">
+                      <a href="mailto:nepallunashree@gmail.com" style="color: #eb1c23; text-decoration: none; font-weight: 600;">nepallunashree@gmail.com</a>
+                    </p>
+                  </div>
+                </div>
+                <div style="background: linear-gradient(135deg, #2d2d2d 0%, #1a1a1a 100%); padding: 30px; text-align: center;">
+                  <p style="color: rgba(255,255,255,0.7); margin: 0 0 10px 0; font-size: 13px;">Keep dancing, keep moving! 💫</p>
+                  <p style="color: rgba(255,255,255,0.5); margin: 0; font-size: 12px;">© ${new Date().getFullYear()} Masala Moves. All rights reserved.</p>
+                  <p style="color: rgba(255,255,255,0.4); margin: 10px 0 0 0; font-size: 11px;">This is an automated email. Please do not reply.</p>
+                </div>
               </div>
-              
-              <p style="font-size: 14px; margin-bottom: 20px; color: #666;">
-                Or copy and paste this link into your browser:<br>
-                <a href="${resetUrl}" style="color: #eb1c23; word-break: break-all;">${resetUrl}</a>
-              </p>
-              
-              <div style="background: #fff3cd; border: 1px solid #ffc107; padding: 15px; border-radius: 8px; margin-top: 25px;">
-                <p style="margin: 0; font-size: 14px; color: #856404;">
-                  <strong>⚠️ Important:</strong> This link will expire in 1 hour. If you didn't request a password reset, please ignore this email.
-                </p>
-              </div>
-            </div>
-            
-            <div style="text-align: center; padding: 20px; color: #666; font-size: 12px;">
-              <p style="margin: 5px 0;">
-                This is an automated email. Please do not reply to this email.
-              </p>
-              <p style="margin: 5px 0;">
-                © ${new Date().getFullYear()} Masala Moves. All rights reserved.
-              </p>
             </div>
           </body>
         </html>

@@ -1,0 +1,8 @@
+node_modules/
+.tmp/
+.cache/
+.git/
+*.log
+.DS_Store
+.env.example
+.strapi-updater.json

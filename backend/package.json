@@ -9,10 +9,11 @@
     "deploy": "strapi deploy",
     "dev": "strapi develop",
     "develop": "strapi develop",
-    "start": "strapi start",
+    "start": "node index.js",
     "strapi": "strapi",
     "upgrade": "npx @strapi/upgrade latest",
-    "upgrade:dry": "npx @strapi/upgrade latest --dry"
+    "upgrade:dry": "npx @strapi/upgrade latest --dry",
+    "vercel-build": "strapi build && node -e \"console.log('Build completed')\""
   },
   "dependencies": {
     "@strapi/plugin-cloud": "5.23.3",
