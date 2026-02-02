@@ -1,15 +1,22 @@
-# fly.toml app configuration file generated for dancee-booking-backendd on 2025-09-27T10:18:52+05:45
+# fly.toml app configuration file generated for masala-moves-backend on 2026-02-02T21:30:20+05:45
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
-app = 'dancee-booking-backendd'
-primary_region = 'ams'
+app = 'masala-moves-backend'
+primary_region = 'lhr'
 
 [build]
 
+[[mounts]]
+  source = 'data'
+  destination = '/data'
+  auto_extend_size_threshold = 80
+  auto_extend_size_increment = '1GB'
+  auto_extend_size_limit = '10GB'
+
 [http_service]
-  internal_port = 3000
+  internal_port = 1337
   force_https = true
   auto_stop_machines = 'stop'
   auto_start_machines = true
@@ -17,6 +24,6 @@ primary_region = 'ams'
   processes = ['app']
 
 [[vm]]
-  memory = '512mb'
-  cpu_kind = 'shared'
-  cpus = 1
+  memory = '1gb'
+  cpus = 2
+  memory_mb = 1024
