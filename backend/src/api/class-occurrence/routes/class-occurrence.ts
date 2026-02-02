@@ -13,7 +13,7 @@ const customRouter = (innerRouter, extraRoutes = []) => {
       return innerRouter.prefix;
     },
     get routes() {
-      if (!routes) routes = innerRouter.routes.concat(extraRoutes);
+      if (!routes) routes = extraRoutes.concat(innerRouter.routes);
       return routes;
     },
   };
@@ -22,7 +22,7 @@ const customRouter = (innerRouter, extraRoutes = []) => {
 const myExtraRoutes = [
   {
     method: "GET",
-    path: "/class-occurrences/:slug",
+    path: "/class-occurrences/slug/:slug",
     handler: "class-occurrence.findBySlug",
     config: {
       auth: false,
