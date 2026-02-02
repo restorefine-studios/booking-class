@@ -5,7 +5,8 @@
       "src": "index.js",
       "use": "@vercel/node",
       "config": {
-        "includeFiles": ["dist/**", "public/**", "config/**", "database/**", ".env"]
+        "includeFiles": ["dist/**", "public/**", "config/**", "database/**", ".env"],
+        "maxLambdaSize": "50mb"
       }
     }
   ],
@@ -38,10 +39,5 @@
   "env": {
     "NODE_ENV": "production",
     "DATABASE_CLIENT": "postgres"
-  },
-  "functions": {
-    "index.js": {
-      "maxDuration": 30
-    }
   }
 }
