@@ -1,6 +1,13 @@
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Initialize Resend only when needed, with proper error handling
+function getResendClient() {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    throw new Error("RESEND_API_KEY environment variable is not set");
+  }
+  return new Resend(apiKey);
+}
 
 interface BookingConfirmationEmailData {
   to: string;
@@ -15,6 +22,9 @@ interface BookingConfirmationEmailData {
 
 export async function sendBookingConfirmationEmail(data: BookingConfirmationEmailData) {
   const { to, customerName, className, classDate, classTime, amount, bookingId, currency = "GBP" } = data;
+
+  // Initialize Resend client when the function is called
+  const resend = getResendClient();
 
   const formattedAmount = new Intl.NumberFormat("en-GB", {
     style: "currency",
