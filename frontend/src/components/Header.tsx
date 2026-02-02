@@ -40,10 +40,6 @@ export default function Header() {
     return user?.username || user?.email || "User";
   };
 
-  // Log current auth state for debugging
-  console.log("� Header render - Auth state:", authState);
-  console.log("� Header render - Is loading:", isLoading);
-
   return (
     <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
       {/* Glassmorphism background with gradient */}

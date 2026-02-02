@@ -9,6 +9,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Calendar, MapPin, Clock, Users, Loader2, Mail, Instagram, Heart, Award } from "lucide-react";
 
+export const dynamic = "force-dynamic";
+
 export default function ClassesPage() {
   const features = [
     {
@@ -35,14 +37,6 @@ export default function ClassesPage() {
 
   const { data: classesResponse, isLoading, error } = useClasses();
   const classes = classesResponse?.data || [];
-
-  // Debug logging
-  console.log("Classes Page Debug:", {
-    isLoading,
-    error: error?.message,
-    classes,
-    classesLength: classes.length,
-  });
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
