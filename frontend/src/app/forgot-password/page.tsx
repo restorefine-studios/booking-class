@@ -9,6 +9,8 @@ import Link from "next/link";
 import { Loader2, ArrowLeft, Mail } from "lucide-react";
 import { toast } from "@/lib/toast";
 
+export const dynamic = "force-static";
+
 export default function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
