@@ -65,14 +65,14 @@ export default function ForgotPasswordPage() {
             <h1 className="text-4xl font-bold mb-3 text-gray-900">
               Forgot <span className="text-gradient">Password?</span>
             </h1>
-            <p className="text-gray-600 text-lg">No worries, we'll send you reset instructions</p>
+            <p className="text-gray-600 text-lg">No worries, we&apos;ll send you reset instructions</p>
           </div>
 
           <Card className="bg-white/90 backdrop-blur-sm border-0 shadow-2xl rounded-3xl overflow-hidden">
             <CardHeader className="bg-gradient-to-r from-[#eb1c23]/5 to-[#7b1c11]/5 pb-6">
               <CardTitle className="text-2xl text-gray-900">Reset Password</CardTitle>
               <CardDescription className="text-gray-600">
-                {isSuccess ? "Check your email for the reset link" : "Enter your email address and we'll send you a link to reset your password"}
+                {isSuccess ? "Check your email for the reset link" : "Enter your email address and we&apos;ll send you a link to reset your password"}
                 <br />
                 <span className="text-xs text-gray-500 mt-2 inline-block">
                   📧 Reset links will be sent from: <strong>no-reply@masalamoves.co.uk</strong>
@@ -88,7 +88,7 @@ export default function ForgotPasswordPage() {
                       <Mail className="h-8 w-8 text-white" />
                     </div>
                     <h3 className="text-xl font-bold text-gray-900 mb-2">Check Your Email!</h3>
-                    <p className="text-gray-600">We've sent a password reset link to</p>
+                    <p className="text-gray-600">We&apos;ve sent a password reset link to</p>
                     <p className="text-[#eb1c23] font-semibold text-lg mt-1">{email}</p>
                   </div>
 
@@ -120,7 +120,7 @@ export default function ForgotPasswordPage() {
 
                   {/* Action Buttons */}
                   <div className="space-y-3 pt-2">
-                    <p className="text-center text-sm text-gray-600 mb-3">Didn't receive the email?</p>
+                    <p className="text-center text-sm text-gray-600 mb-3">Didn&apos;t receive the email?</p>
                     <Button
                       onClick={() => {
                         setIsSuccess(false);

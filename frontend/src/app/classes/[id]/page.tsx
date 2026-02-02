@@ -1,11 +1,8 @@
 "use client";
 
-import { useState } from "react";
 import { useParams } from "next/navigation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { useClassByIdOrSlug } from "@/hooks/use-classes";
 import { useAuthState } from "@/hooks/use-auth";
 import { getStrapiMediaURL, type ClassOccurrence } from "@/lib/strapi";
@@ -331,13 +328,17 @@ export default function ClassDetailPage() {
 
                     {/* Complete Booking Button */}
                     <div className="pt-4">
-                      {authState?.isAuthenticated || (bookingType === "guest" && guestForm.firstName && guestForm.lastName && guestForm.email) ? (
+                      {authState?.isAuthenticated ? (
                         <Button onClick={handleBooking} className="w-full bg-gradient-to-r from-saffron to-bollywood-pink hover:from-saffron/90 hover:to-bollywood-pink/90 text-white font-semibold py-3 shadow-lg hover:shadow-xl transition-all duration-300" size="lg">
                           Complete Booking
                         </Button>
                       ) : (
-                        <Button disabled className="w-full bg-gray-300 text-gray-500 font-semibold py-3 cursor-not-allowed" size="lg">
-                          Complete Customer Info
+                        <Button
+                          onClick={() => router.push(`/login?returnUrl=/classes/${classIdOrSlug}`)}
+                          className="w-full bg-gradient-to-r from-[#eb1c23] to-[#7b1c11] hover:from-[#eb1c23]/90 hover:to-[#7b1c11]/90 text-white font-semibold py-3 shadow-lg hover:shadow-xl transition-all duration-300"
+                          size="lg"
+                        >
+                          Login to Book
                         </Button>
                       )}
                     </div>
