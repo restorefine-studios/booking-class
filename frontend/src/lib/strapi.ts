@@ -346,8 +346,12 @@ class StrapiAPI {
     return this.request(`/class-occurrences?filters[date][$gte]=${today}&sort=date:asc&populate=thumbnail`);
   }
 
-  // Get class occurrence by ID
+  // Get class occurrence by ID or slug
   async getClassOccurrence(id: string): Promise<StrapiResponse<ClassOccurrence>> {
+    // If id contains non-numeric characters, treat as slug
+    if (isNaN(Number(id))) {
+      return this.request(`/class-occurrences/slug/${id}?populate=thumbnail`);
+    }
     return this.request(`/class-occurrences/${id}?populate=thumbnail`);
   }
 
